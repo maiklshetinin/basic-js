@@ -23,9 +23,39 @@ const { NotImplementedError } = require('../extensions/index.js');
  *  [1, 1, 1]
  * ]
  */
-function minesweeper(/* matrix */) {
-  throw new NotImplementedError('Not implemented');
-  // remove line with error and write your code here
+ function minesweeper(matrix) {
+  let arr = matrix.map(el => el.map(el => el = 0))
+  for (let row = 0; row < matrix.length; row++) {
+      for (col = 0; col < matrix[row].length; col++) {
+          if (row === 0) {
+              if (col === 0) {
+                  arr[row][col] += matrix[row][col + 1] + matrix[row + 1][col] + matrix[row + 1][col + 1]
+              } else if (col === matrix[row].length - 1) {
+                  arr[row][col] += matrix[row][col - 1] + matrix[row + 1][col] + matrix[row + 1][col - 1]
+              } else {
+                  arr[row][col] += matrix[row][col - 1] + matrix[row][col + 1] + matrix[row + 1][col] + matrix[row + 1][col - 1] + matrix[row + 1][col + 1]
+              }
+          }else if(row===matrix.length-1){
+              if (col === 0) {
+                  arr[row][col] += matrix[row][col + 1] + matrix[row - 1][col] + matrix[row - 1][col + 1]
+              } else if (col === matrix[row].length - 1) {
+                  arr[row][col] += matrix[row][col - 1] + matrix[row - 1][col] + matrix[row - 1][col - 1]
+              } else {
+                  arr[row][col] += matrix[row][col - 1] + matrix[row][col + 1] + matrix[row - 1][col] + matrix[row - 1][col - 1] + matrix[row - 1][col + 1]
+              } 
+          }else{
+              if (col === 0) {
+                  arr[row][col] += matrix[row][col + 1] + matrix[row - 1][col] + matrix[row - 1][col + 1]+ matrix[row + 1][col] + matrix[row + 1][col + 1]
+              } else if (col === matrix[row].length - 1) {
+                  arr[row][col] += matrix[row][col - 1] + matrix[row - 1][col] + matrix[row - 1][col - 1]+ matrix[row + 1][col] + matrix[row + 1][col - 1]
+              } else {
+                  arr[row][col] += matrix[row][col - 1] + matrix[row][col + 1] + matrix[row - 1][col] + matrix[row - 1][col - 1] + matrix[row - 1][col + 1]+ matrix[row + 1][col] + matrix[row + 1][col - 1] + matrix[row + 1][col + 1]
+              } 
+          }
+      } 
+  }
+
+  return(arr)
 }
 
 module.exports = {
