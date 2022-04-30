@@ -43,9 +43,9 @@ const { NotImplementedError } = require('../extensions/index.js');
       }
       else if (res[i] === '--discard-next') {
           if (res[i + 2] === '--discard-prev' || res[i + 2] === '--double-prev') {
-              res.splice(res[i - 1], 3)
+              res.splice(i, 3)
           } else {
-              res.splice(res[i - 1], 2)
+              res.splice(i, 2)
           }
           i--
       } else if (typeof(res[i]) === 'undefined') {
